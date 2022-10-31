@@ -5,7 +5,7 @@ from PIL import Image as PilImage
 from PIL import ImageTk
 
 class Window:
-    def __init__(self, width=1080, height=546, title = "Звонки по расписанию", icon=r"resources/oblozhka.jpg"):
+    def __init__(self, width=1080, height=546, title = "Звонки по расписанию", icon=r"resources/oblozhka.ico"):
 
         self.root = Tk()
         self.root.title(title)
@@ -14,7 +14,6 @@ class Window:
         img = PilImage.open(r"resources\plus.png")
         img = img.resize((40, 40), PilImage.ANTIALIAS)
         self.photo_image = ImageTk.PhotoImage(img)
-        if icon:
 
     def Label_bg_days_buttons(self):
 
