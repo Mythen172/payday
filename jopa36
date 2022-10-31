@@ -1,0 +1,16 @@
+from datetime import datetime
+
+class time:
+    def __init__(self, w, h, m):
+        self.w = w
+        self.h = h
+        self.m = m
+
+
+now = datetime.now()
+w = now.weekday()+1
+h = now.hour
+m = now.minute
+t = time(w, h, m)
+if t.w == 2 and t.h == 1 and t.m == 41:
+     print ("jopa")

@@ -1,0 +1,16 @@
+from datetime import datetime
+
+class time:
+    def dt():
+        global w, h, m
+        current_datetime = datetime.now()
+        w = current_datetime.weekday()+1
+        h = current_datetime.hour
+        m = current_datetime.minute
+        print(current_datetime.weekday()+1)
+        print(current_datetime.hour)
+        print(current_datetime.minute)
+        return w, h, m
+#if time != (1, 23, 1):
+    #print("jopa")
+    print (w)
