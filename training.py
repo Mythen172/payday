@@ -1,31 +1,27 @@
 from tkinter import *
 from PIL import Image as PilImage
 from PIL import ImageTk
-from child_window import Child_window
+from child_window import *
 
-class Window:
-    def __init__(self, width=1080, height=546, title = "Звонки по расписанию", icon=r"resources/oblozhka.ico"):
-        
-        self.root = Tk()
-        self.root.title(title)
-        self.root.geometry(f"{width}x{height}+400+260")
-        self.root.iconbitmap(icon)
-        self.root['bg']= '#B3B1B1'
+class app(Tk):
+    def __init__(self):
+
+        super().__init__()
+        self.title("Создать новое расписание")
+        self.geometry("1080x546+400+260")
+        self.iconbitmap(r"resources/oblozhka.ico")
+        self['bg'] = '#B3B1B1'
         img = PilImage.open(r"resources\plus.png")
         img = img.resize((40, 40), PilImage.ANTIALIAS)
         self.photo_image = ImageTk.PhotoImage(img)
 
-    def Label_bg_days_buttons(self):
-
-        But_mon=Button(image=self.photo_image, bg="#B3B1B1", relief="flat", cursor="hand2", command=self.create_child).grid(column=1, row=0, padx=5)
-        But_tue=Button(image=self.photo_image, bg="#B3B1B1", relief="flat", cursor="hand2", command=self.create_child).grid(column=1, row=1)
-        But_Wed=Button(image=self.photo_image, bg="#B3B1B1", relief="flat", cursor="hand2", command=self.create_child).grid(column=1, row=2)
-        But_the=Button(image=self.photo_image, bg="#B3B1B1", relief="flat", cursor="hand2", command=self.create_child).grid(column=1, row=3)
-        But_fri=Button(image=self.photo_image, bg="#B3B1B1", relief="flat", cursor="hand2", command=self.create_child).grid(column=1, row=4)
-        But_sut=Button(image=self.photo_image, bg="#B3B1B1", relief="flat", cursor="hand2", command=self.create_child).grid(column=1, row=5)
-        But_sun=Button(image=self.photo_image, bg="#B3B1B1", relief="flat", cursor="hand2", command=self.create_child).grid(column=1, row=6)
-
-    def Label_days(self):
+        self.But_mon=Button(image=self.photo_image, bg="#B3B1B1", relief="flat", cursor="hand2", command=self.open_window).grid(column=1, row=0, padx=5)
+        self.But_tue=Button(image=self.photo_image, bg="#B3B1B1", relief="flat", cursor="hand2", command=self.open_window).grid(column=1, row=1)
+        self.But_Wed=Button(image=self.photo_image, bg="#B3B1B1", relief="flat", cursor="hand2", command=self.open_window).grid(column=1, row=2)
+        self.But_the=Button(image=self.photo_image, bg="#B3B1B1", relief="flat", cursor="hand2", command=self.open_window).grid(column=1, row=3)
+        self.But_fri=Button(image=self.photo_image, bg="#B3B1B1", relief="flat", cursor="hand2", command=self.open_window).grid(column=1, row=4)
+        self.But_sut=Button(image=self.photo_image, bg="#B3B1B1", relief="flat", cursor="hand2", command=self.open_window).grid(column=1, row=5)
+        self.But_sun=Button(image=self.photo_image, bg="#B3B1B1", relief="flat", cursor="hand2", command=self.open_window).grid(column=1, row=6)
 
         Label(text="Понедельник", font=("candara Bold", 15), bg="#48B3C9", relief="flat", borderwidth=2, height=3, width=11).grid(column=0, row=0)
         Label(text="Вторник", font=("candara Bold", 15), bg="#48B3C9", relief="flat", borderwidth=2, height=3, width=11).grid(column=0, row=1)
@@ -36,15 +32,10 @@ class Window:
         Label(text="Воскресенье", font=("candara Bold", 15), bg="#48B3C9", relief="flat", borderwidth=2, height=3, width=11).grid(column=0, row=6)
         Label(font=("candara Bold", 15), bg="#48B3C9", relief="flat", borderwidth=2, height=22, width=11).grid(column=0, row=7)
 
-    def create_child(self, label, width=1080, height=546, resizable=(False, False), title = "Создать новое расписание", icon=r"resources/oblozhka.ico"):
-
-        Child_window(self.root, label, width, height, resizable, title, icon)
-
-    def run(self):
-        self.Label_days()
-        self.Label_bg_days_buttons()
-        self.root.mainloop()
+    def open_window(self):
+        child = Child_window(self)
+        child.grab_set()
 
 if __name__ == "__main__":
-    window = Window()
-    window.run()
+    app = app()
+    app.mainloop()
