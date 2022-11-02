@@ -13,5 +13,5 @@ class Child_window(Toplevel):
         img = PilImage.open(r"resources\galochka.png")
         img = img.resize((40, 40), PilImage.ANTIALIAS)
         self.photo_image_g = ImageTk.PhotoImage(img)
-
-        self.button_accept = Button(self, image=self.photo_image_g, width=60, height=60).place(x=224,y=205)
+        
+        self.button_accept = Button(self, image=self.photo_image_g, width=60, height=60, command=self.destroy).place(x=224,y=205)

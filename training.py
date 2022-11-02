@@ -1,7 +1,8 @@
 from tkinter import *
 from PIL import Image as PilImage
 from PIL import ImageTk
-from child_window import *
+from child_window import Child_window
+from Check_time import checktime
 
 class app(Tk):
     def __init__(self):
@@ -38,4 +39,5 @@ class app(Tk):
 
 if __name__ == "__main__":
     app = app()
+    checktime()
     app.mainloop()
