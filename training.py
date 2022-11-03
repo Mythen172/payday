@@ -16,6 +16,9 @@ class app(Tk):
         img = img.resize((40, 40), PilImage.ANTIALIAS)
         self.photo_image = ImageTk.PhotoImage(img)
 
+
+    def button_on_window(self):
+
         self.But_mon=Button(image=self.photo_image, bg="#B3B1B1", relief="flat", cursor="hand2", command=self.open_window).grid(column=1, row=0, padx=5)
         self.But_tue=Button(image=self.photo_image, bg="#B3B1B1", relief="flat", cursor="hand2", command=self.open_window).grid(column=1, row=1)
         self.But_Wed=Button(image=self.photo_image, bg="#B3B1B1", relief="flat", cursor="hand2", command=self.open_window).grid(column=1, row=2)
@@ -23,6 +26,8 @@ class app(Tk):
         self.But_fri=Button(image=self.photo_image, bg="#B3B1B1", relief="flat", cursor="hand2", command=self.open_window).grid(column=1, row=4)
         self.But_sut=Button(image=self.photo_image, bg="#B3B1B1", relief="flat", cursor="hand2", command=self.open_window).grid(column=1, row=5)
         self.But_sun=Button(image=self.photo_image, bg="#B3B1B1", relief="flat", cursor="hand2", command=self.open_window).grid(column=1, row=6)
+
+    def label_on_window(self):
 
         Label(text="Понедельник", font=("candara Bold", 15), bg="#48B3C9", relief="flat", borderwidth=2, height=3, width=11).grid(column=0, row=0)
         Label(text="Вторник", font=("candara Bold", 15), bg="#48B3C9", relief="flat", borderwidth=2, height=3, width=11).grid(column=0, row=1)
@@ -33,11 +38,14 @@ class app(Tk):
         Label(text="Воскресенье", font=("candara Bold", 15), bg="#48B3C9", relief="flat", borderwidth=2, height=3, width=11).grid(column=0, row=6)
         Label(font=("candara Bold", 15), bg="#48B3C9", relief="flat", borderwidth=2, height=22, width=11).grid(column=0, row=7)
 
+
     def open_window(self):
         child = Child_window(self)
         child.grab_set()
 
 if __name__ == "__main__":
-    app = app()
+    App = app()
     checktime()
-    app.mainloop()
+    App.label_on_window()
+    App.button_on_window()
+    App.mainloop()
