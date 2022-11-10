@@ -65,7 +65,7 @@ class Child_window(Toplevel):
         self.button_accept = Button(self, image=self.photo_image_g, width=50, height=50, relief='flat', command=self.destroy).place(x=174,y=110)
         self.label = Label(self, font=('candara Bold', 15), width=20, height=7, text='Введите время через ":"').place(x=90, y=-70)
         self.entry = Entry(self, width=4, font=('candara Bold', 20), validate='key', validatecommand=self.check)
-        self.entry.insert(2, ':')
+        self.entry.insert(2, ":")
         self.entry.pack(anchor=CENTER, pady=62)
 
 class checktime:
