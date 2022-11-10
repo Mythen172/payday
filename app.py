@@ -5,6 +5,9 @@ from PIL import ImageTk
 from datetime import datetime
 import re
 
+days_ru = ['Понедельник','Вторник','Среда','Четверг','Пятница','Суббота','Воскресенье']
+days_en = ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday']
+
 class app(Tk):
     def __init__(self):
 
@@ -19,35 +22,31 @@ class app(Tk):
 
     def button_on_window(self):
 
-        self.But_mon=Button(image=self.photo_image, bg="#B3B1B1", relief="flat", cursor="hand2", command=self.open_window).grid(column=1, row=0, padx=5)
-        self.But_tue=Button(image=self.photo_image, bg="#B3B1B1", relief="flat", cursor="hand2", command=self.open_window).grid(column=1, row=1)
-        self.But_Wed=Button(image=self.photo_image, bg="#B3B1B1", relief="flat", cursor="hand2", command=self.open_window).grid(column=1, row=2)
-        self.But_fri=Button(image=self.photo_image, bg="#B3B1B1", relief="flat", cursor="hand2", command=self.open_window).grid(column=1, row=4)
-        self.But_the=Button(image=self.photo_image, bg="#B3B1B1", relief="flat", cursor="hand2", command=self.open_window).grid(column=1, row=3)
-        self.But_sut=Button(image=self.photo_image, bg="#B3B1B1", relief="flat", cursor="hand2", command=self.open_window).grid(column=1, row=5)
-        self.But_sun=Button(image=self.photo_image, bg="#B3B1B1", relief="flat", cursor="hand2", command=self.open_window).grid(column=1, row=6)
+        for i in range(len(days_en)):
+            self.day = days_en[i]
+            self.day=Button(image=self.photo_image, bg="#B3B1B1", relief="flat", cursor="hand2", command=lambda jopa=days_en[i]: self.add_newcell(jopa)).grid(column=1, row=i, padx=5)
+            i=+i
 
     def label_on_window(self):
 
-        Label(text="Понедельник", font=("candara Bold", 15), bg="#48B3C9", relief="flat", borderwidth=2, height=3, width=11).grid(column=0, row=0)
-        Label(text="Вторник", font=("candara Bold", 15), bg="#48B3C9", relief="flat", borderwidth=2, height=3, width=11).grid(column=0, row=1)
-        Label(text="Среда", font=("candara Bold", 15), bg="#48B3C9", relief="flat", borderwidth=2, height=3, width=11).grid(column=0, row=2)
-        Label(text="Четверг", font=("candara Bold", 15), bg="#48B3C9", relief="flat", borderwidth=2, height=3, width=11).grid(column=0, row=3)
-        Label(text="Пятница", font=("candara Bold", 15), bg="#48B3C9", relief="flat", borderwidth=2, height=3, width=11).grid(column=0, row=4)
-        Label(text="Суббота", font=("candara Bold", 15), bg="#48B3C9", relief="flat", borderwidth=2, height=3, width=11).grid(column=0, row=5)
-        Label(text="Воскресенье", font=("candara Bold", 15), bg="#48B3C9", relief="flat", borderwidth=2, height=3, width=11).grid(column=0, row=6)
+        for i in range(len(days_ru)): 
+            Label(text=days_ru[i], font=("candara Bold", 15), bg="#48B3C9", relief="flat", borderwidth=2, height=3, width=11).grid(column=0, row=i)
+            i=+i
+
         Label(font=("candara Bold", 15), bg="#48B3C9", relief="flat", borderwidth=2, height=22, width=11).grid(column=0, row=7)
 
-    def open_window(self):
+    def add_newcell(self, jopa):
+            print(jopa)
 
-        child = Child_window(self)
-        child.grab_set()
-        child.execute_accept()
+            def open_window(self):
+                child = Child_window(self)
+                child.grab_set()
+                child.execute_accept()
 
 class Child_window(Toplevel):
 
     def execute_accept(self, newval):
-        return re.match("\d{0,5}$", newval) is not None
+        return re.match("\d{0,2}$", newval) is not None
 
     def __init__(self, parent):
 
@@ -64,9 +63,8 @@ class Child_window(Toplevel):
 
         self.button_accept = Button(self, image=self.photo_image_g, width=50, height=50, relief='flat', command=self.destroy).place(x=174,y=110)
         self.label = Label(self, font=('candara Bold', 15), width=20, height=7, text='Введите время через ":"').place(x=90, y=-70)
-        self.entry = Entry(self, width=4, font=('candara Bold', 20), validate='key', validatecommand=self.check)
-        self.entry.insert(2, ':')
-        self.entry.pack(anchor=CENTER, pady=62)
+        self.entry = Entry(self, width=2, font=('candara Bold', 20), validate='key', validatecommand=self.check).pack(anchor=W, padx=150, pady=62)
+        self.entry1 = Entry(self, width=2, font=('candara Bold', 20), validate='key', validatecommand=self.check).pack(anchor=E,padx=50, pady=62)
 
 class checktime:
     def __init__(self):
@@ -76,7 +74,7 @@ class checktime:
         self.h = self.now.hour
         self.m = self.now.minute
 
-        if self.w == 2 and self.h == 13 and self.m == 35:
+        if self.w == 4 and self.h == 22 and self.m == 37:
             print('jopa')
 
 if __name__ == "__main__":
