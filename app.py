@@ -1,12 +1,11 @@
 from tkinter import *
-from tkinter.ttk import Combobox
 from PIL import Image as PilImage
 from PIL import ImageTk
 from datetime import datetime
 import re
 
 days_ru = ['Понедельник','Вторник','Среда','Четверг','Пятница','Суббота','Воскресенье']
-days_en = ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday']
+days_en = ['1','2','3','4','5','6','7']
 
 class app(Tk):
     def __init__(self):
@@ -37,16 +36,17 @@ class app(Tk):
 
     def add_newcell(self, jopa):
             print(jopa)
+            self.open_window()
 
-            def open_window(self):
-                child = Child_window(self)
-                child.grab_set()
-                child.execute_accept()
+    def open_window(self):
+
+        child = Child_window(self)
+        child.grab_set()
 
 class Child_window(Toplevel):
 
     def execute_accept(self, newval):
-        return re.match("\d{0,2}$", newval) is not None
+        return re.match("^\d{0,2}\:{0,1}\d{0,2}$", newval) is not None
 
     def __init__(self, parent):
 
@@ -58,23 +58,30 @@ class Child_window(Toplevel):
         img = PilImage.open(r"resources\galochka.png")
         img = img.resize((40, 40), PilImage.ANTIALIAS)
         self.photo_image_g = ImageTk.PhotoImage(img)
-
         self.check = (self.register(self.execute_accept), "%P")
 
-        self.button_accept = Button(self, image=self.photo_image_g, width=50, height=50, relief='flat', command=self.destroy).place(x=174,y=110)
+        self.button_accept = Button(self, image=self.photo_image_g, width=50, height=50, relief='flat', command=self.destroy)
+        self.button_accept.bind('<Button-1>', self.set_value)
+        self.button_accept.place(x=174,y=110)
         self.label = Label(self, font=('candara Bold', 15), width=20, height=7, text='Введите время через ":"').place(x=90, y=-70)
-        self.entry = Entry(self, width=2, font=('candara Bold', 20), validate='key', validatecommand=self.check).pack(anchor=W, padx=150, pady=62)
-        self.entry1 = Entry(self, width=2, font=('candara Bold', 20), validate='key', validatecommand=self.check).pack(anchor=E,padx=50, pady=62)
+        self.entry = Entry(self, width=5, font=('candara Bold', 20), validate='key', justify=CENTER, validatecommand=self.check)
+        self.entry.focus()
+        self.entry.pack(anchor=CENTER, padx=150, pady=62)
+
+    def set_value(self, hours):
+        hours = self.entry.get()
+        hours.index
+        print(hours)
 
 class checktime:
     def __init__(self):
 
-        self.now = datetime.now()
-        self.w = self.now.weekday()+1
-        self.h = self.now.hour
-        self.m = self.now.minute
+        now = datetime.now()
+        w = now.weekday()+1
+        h = now.hour
+        m = now.minute
 
-        if self.w == 4 and self.h == 22 and self.m == 37:
+        if w == 4 and h == 22 and m == 37:
             print('jopa')
 
 if __name__ == "__main__":
